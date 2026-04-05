@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fasilitas Sekolah</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+/* BACKGROUND */
+body{
+  background:linear-gradient(135deg,#050505,#0f2027,#203a43,#2c5364);
+  color:white;
+  overflow-x:hidden;
+}
+
+/* PARTICLE */
+canvas{
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1;
+}
+
+/* OPENING */
+#opening{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:linear-gradient(135deg,#001f3f,#003366,#004080);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
+}
+
+.loading-box{
+  text-align:center;
+  width:80%;
+  max-width:400px;
+}
+
+.loading-box h1{
+  color:#00ccff;
+  margin-bottom:20px;
+}
+
+.bar{
+  width:100%;
+  height:12px;
+  background:rgba(255,255,255,0.1);
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.progress{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,#00ccff,#66ffff);
+  box-shadow:0 0 15px #00ccff;
+}
+
+#status{
+  margin-top:15px;
+  font-size:14px;
+}
+
+/* HEADER */
+header{
+  text-align:center;
+  padding:60px 20px 20px;
+}
+
+header h1{
+  font-size:2.5em;
+  background:linear-gradient(to right,gold,#39ff14);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  position:relative;
+  overflow:hidden;
+}
+
+/* SCAN JUDUL */
+header h1::after{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.8),transparent);
+  animation:scan 3s infinite;
+}
+
+@keyframes scan{
+  0%{left:-100%;}
+  100%{left:100%;}
+}
+
+header p{
+  opacity:0.7;
+}
+
+/* FASILITAS */
+#fasilitas{
+  padding:60px 20px;
+  text-align:center;
+}
+
+#fasilitas h2{
+  color:gold;
+  margin-bottom:30px;
+}
+
+.fasilitas-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+}
+
+/* CARD */
+.fasilitas-box{
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(10px);
+  border-radius:20px;
+  overflow:hidden;
+  transition:0.4s;
+  position:relative;
+
+  box-shadow:0 0 8px #39ff14, 0 0 15px #39ff14 inset;
+}
+
+.fasilitas-box:hover{
+  transform:translateY(-10px) scale(1.04);
+  box-shadow:0 0 25px #39ff14, 0 0 50px #39ff14;
+}
+
+/* SCAN FOTO */
+.fasilitas-box::after{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
+  transition:0.5s;
+}
+
+.fasilitas-box:hover::after{
+  left:100%;
+}
+
+/* GAMBAR */
+.fasilitas-box img{
+  width:100%;
+  height:auto;
+  display:block;
+}
+
+/* TEXT */
+.fasilitas-box p{
+  padding:15px;
+  font-weight:bold;
+}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  header h1{
+    font-size:1.8em;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- OPENING -->
+<div id="opening">
+  <div class="loading-box">
+    <h1>ANTOSAN SABAR SENYUM DONG</h1>
+    <div class="bar">
+      <div class="progress" id="progress"></div>
+    </div>
+    <p id="status">Initializing...</p>
+  </div>
+</div>
+
+<canvas id="particle"></canvas>
+
+<header>
+  <h1>SAPRAS</h1>
+  <p>SMP Negeri 1 Sindang</p>
+</header>
+
+<section id="fasilitas">
+  <h2>Fasilitas Sekolah</h2>
+
+  <div class="fasilitas-grid">
+
+    <div class="fasilitas-box"><img src="LAPANG.jpeg"><p>LAPANGAN</p></div>
+    <div class="fasilitas-box"><img src="ruang pmr.jpeg"><p>RUANG PMR</p></div>
+    <div class="fasilitas-box"><img src="GAZEBO.jpeg"><p>GAZEBO</p></div>
+    <div class="fasilitas-box"><img src="GADA.jpeg"><p>GADA GADA</p></div>
+    <div class="fasilitas-box"><img src="TU RUANG.jpeg"><p>RUANG TU</p></div>
+    <div class="fasilitas-box"><img src="jamban.jpg"><p>WC SISWA</p></div>
+    <div class="fasilitas-box"><img src="IPA.jpeg"><p>LAB IPA</p></div>
+    <div class="fasilitas-box"><img src="MUSHOLA.jpeg"><p>MUSOLA</p></div>
+    <div class="fasilitas-box"><img src="ruang kepsek.jpeg"><p>RUANG KEPSEK</p></div>
+    <div class="fasilitas-box"><img src="Kantin (2).jpeg"><p>KANTIN</p></div>
+    <div class="fasilitas-box"><img src="KANTIN 1.jpeg"><p>KANTIN 2</p></div>
+    <div class="fasilitas-box"><img src="Alat Sains.jpeg"><p>SAINS</p></div>
+    <div class="fasilitas-box"><img src="Alat PMR.jpeg"><p>ALAT PMR</p></div>
+
+  </div>
+</section>
+
+<script>
+// OPENING LOADER
+let load=0;
+let progress=document.getElementById("progress");
+let statusText=document.getElementById("status");
+
+let texts=[
+  "Initializing system...",
+  "Loading database...",
+  "Connecting server...",
+  "Access granted...",
+  "Launching interface..."
+];
+
+let i=0;
+
+let interval=setInterval(()=>{
+  load++;
+  progress.style.width=load+"%";
+
+  if(load%20===0 && i<texts.length){
+    statusText.innerText=texts[i];
+    i++;
+  }
+
+  if(load>=100){
+    clearInterval(interval);
+    document.getElementById("opening").style.opacity="0";
+    setTimeout(()=>{
+      document.getElementById("opening").style.display="none";
+    },500);
+  }
+},40);
+
+// PARTICLE
+const canvas=document.getElementById("particle");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+for(let i=0;i<80;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    size:Math.random()*3+1,
+    speedX:(Math.random()-0.5),
+    speedY:(Math.random()-0.5)
+  });
+}
+
+let mouse={x:null,y:null,radius:120};
+
+window.addEventListener("mousemove",e=>{
+  mouse.x=e.x;
+  mouse.y=e.y;
+});
+
+window.addEventListener("touchmove",e=>{
+  mouse.x=e.touches[0].clientX;
+  mouse.y=e.touches[0].clientY;
+});
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  particles.forEach(p=>{
+    p.x+=p.speedX;
+    p.y+=p.speedY;
+
+    if(p.x<0||p.x>canvas.width)p.speedX*=-1;
+    if(p.y<0||p.y>canvas.height)p.speedY*=-1;
+
+    let dx=mouse.x-p.x;
+    let dy=mouse.y-p.y;
+    let dist=Math.sqrt(dx*dx+dy*dy);
+
+    if(dist<mouse.radius){
+      p.x-=dx/20;
+      p.y-=dy/20;
+    }
+
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.size,0,Math.PI*2);
+    ctx.fillStyle="gold";
+    ctx.fill();
+  });
+
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+window.addEventListener("resize",()=>{
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+});
+</script>
+
+</body>
+</html>
